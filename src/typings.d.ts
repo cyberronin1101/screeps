@@ -1,10 +1,8 @@
-declare enum Role {
-  HARVESTER,
-  UPGRADER,
-  BUILDER,
-}
+import { Role } from "./types";
 
-interface CreepMemory {
-  role: Role;
-  building?: boolean;
+declare global {
+  interface CreepMemory {
+    role: Role;
+    building?: boolean;
+  }
 }

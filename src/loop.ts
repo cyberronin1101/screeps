@@ -1,6 +1,7 @@
 import { roleHarvester } from "./roles/harvester.role";
 import { roleUpgrader } from "./roles/upgrader.role";
 import { roleBuilder } from "./roles/builder.role";
+import { Role } from "./types";
 
 module.exports.loop = () => {
   for (const name in Memory.creeps) {
@@ -48,7 +49,7 @@ module.exports.loop = () => {
   }
 
   creeps.forEach((creep) => {
-    switch (creep.memory.role) {
+    switch (String(creep.memory.role)) {
       case Role.HARVESTER:
         roleHarvester.run(creep);
         break;
