@@ -11,6 +11,33 @@ module.exports.loop = () => {
     }
   }
 
+  const structures = Object.values(Game.structures);
+
+  structures.forEach((structure) => {
+    if (structure.structureType === STRUCTURE_TOWER) {
+      const tower = structure as StructureTower;
+
+      const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+
+      if (closestHostile) {
+        tower.attack(closestHostile);
+        return;
+      }
+
+      const closestDamagedStructure = tower.pos.findClosestByRange(
+        FIND_STRUCTURES,
+        {
+          filter: (structure) => structure.hits < structure.hitsMax,
+        },
+      );
+
+      if (closestDamagedStructure) {
+        tower.repair(closestDamagedStructure);
+        return;
+      }
+    }
+  });
+
   const creeps = Object.values(Game.creeps);
 
   const harvesters = creeps.filter(
