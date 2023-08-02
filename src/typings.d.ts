@@ -1,4 +1,10 @@
+declare enum Role {
+  HARVESTER,
+  UPGRADER,
+  BUILDER,
+}
+
 interface CreepMemory {
-  role: "harvester" | "upgrader" | "builder";
-  building: boolean;
+  role: Role;
+  building?: boolean;
 }
